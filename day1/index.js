@@ -1,11 +1,13 @@
-const fs = require('fs/promises');
-const path = require('path');
-const _ = require('lodash');
+import fs from 'fs/promises';
+import path from 'path';
+import _ from 'lodash';
 
+import stuff from '../index.js';
+console.log(stuff);
 // Find elf with most snacks
 const getHungriestElf = async() => {
   try {
-    const parsed = await getData();
+    const parsed = await loadInput('./input.txt');
     const elfCalories =  _.map(parsed, (elfArr, idx) => {
       return  _.sum(elfArr);
     });
