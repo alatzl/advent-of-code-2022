@@ -1,13 +1,29 @@
 import fs from 'fs/promises';
 import path from 'path';
 import _ from 'lodash';
+import utils from '../utils.js';
 
-import stuff from '../index.js';
-console.log(stuff);
+const testInput = `1000
+2000
+3000
+
+4000
+
+5000
+6000
+
+7000
+8000
+9000
+
+10000
+`;
+
 // Find elf with most snacks
 const getHungriestElf = async() => {
   try {
-    const parsed = await loadInput('./input.txt');
+    // const parsed = testInput.split('\n');
+    const parsed = await utils.loadInput('./input.txt');
     const elfCalories =  _.map(parsed, (elfArr, idx) => {
       return  _.sum(elfArr);
     });

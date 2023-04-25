@@ -4,8 +4,12 @@ const fs = require('fs/promises');
   B > A
   C > B
 */
+const testInput = `A Y
+B X
+C Z`;
 
 const calculateScores = async () => {
+  // let input = testInput.split('\n');
   let input = await fs.readFile('./input.txt');
   input = input.toString().split('\n');
 

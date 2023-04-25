@@ -2,7 +2,15 @@ const fs = require('fs/promises');
 const _ = require('lodash');
 const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+const testInput = `vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw`;
+
 const getPriorities = async () => {
+  // let input = testInput.split('\n');
   let input = await fs.readFile('./input.txt');
   input = _.compact(input.toString().split('\n'));
   let priorityTotal = 0;

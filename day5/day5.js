@@ -1,7 +1,18 @@
 import _ from 'lodash';
 import utils from '../utils.js';
 
+const testInput = `    [D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2`;
+
 const solve = async (part) => {
+  // const input = testInput.split('\n');
   const input = await utils.loadInput('./input.txt');
   const breakPoint = input.findIndex(str => str.indexOf('move') > -1);
   const rows = input.slice(0, breakPoint);
