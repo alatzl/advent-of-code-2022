@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import utils from '../utils.js';
+import utils from './utils.js';
 
 const testInput = `30373
 25512
@@ -8,7 +8,7 @@ const testInput = `30373
 35390`;
 
 const solve = async () => {
-  const input = await utils.loadInput('./input.txt');
+  const input = await utils.loadInput('./inputs/day8.txt');
   // const input = testInput.split('\n');
 
   let visibleTrees = 0;

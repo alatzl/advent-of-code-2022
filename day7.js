@@ -1,6 +1,6 @@
 // @ts-check
 import _ from 'lodash';
-import utils from '../utils.js';
+import utils from './utils.js';
 
 const testInput = `$ cd /
 $ ls
@@ -28,7 +28,7 @@ $ ls
 `;
 
 const solve = async (part) => {
-  const input = await utils.loadInput('./input.txt');
+  const input = await utils.loadInput('./inputs/day7.txt');
   // const input = testInput.split('\n');
   
   /** @returns {{files: object, dirs: object, name: string, parent: any}} */
@@ -133,7 +133,7 @@ solve().then(res => console.log(res));
 function print(directory, indent = 0) {
   const indentString = '\t'.repeat(indent);
 
-  console.log(indentString + directory.name);
+  // console.log(indentString + directory.name);
 
   Object.values(directory.files).forEach(file => {
     console.log(`${indentString}\t${file.name} - ${file.size}`)

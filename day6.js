@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import utils from '../utils.js';
+import utils from './utils.js';
 
 const solve = async (part) => {
-  let input = await utils.loadInput('./input.txt');
+  let input = await utils.loadInput('./inputs/day6.txt');
   input = input.toString();
 
   let marker;
@@ -30,4 +30,5 @@ const solve = async (part) => {
   return marker;
 }
 
+solve('part1').then(res => console.log(res));
 solve('part2').then(res => console.log(res));

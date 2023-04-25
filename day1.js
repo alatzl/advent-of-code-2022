@@ -1,7 +1,6 @@
 import fs from 'fs/promises';
-import path from 'path';
 import _ from 'lodash';
-import utils from '../utils.js';
+import utils from './utils.js';
 
 const testInput = `1000
 2000
@@ -22,8 +21,7 @@ const testInput = `1000
 // Find elf with most snacks
 const getHungriestElf = async() => {
   try {
-    // const parsed = testInput.split('\n');
-    const parsed = await utils.loadInput('./input.txt');
+    const parsed = await getData();
     const elfCalories =  _.map(parsed, (elfArr, idx) => {
       return  _.sum(elfArr);
     });
@@ -34,7 +32,8 @@ const getHungriestElf = async() => {
 }
 
 const getData = async () => {
-  const data = await fs.readFile(__dirname + "/input.txt", "utf-8")
+  // const data = testInput;
+  const data = await fs.readFile("./inputs/day1.txt", "utf-8")
 
     const elfArrays = data.toString().split(`\n\n`).map(item => {
         return item.split(`\n`);
@@ -49,8 +48,6 @@ const getData = async () => {
     return parsed;
 };
 
-getHungriestElf();
-
 const getTopThreeElves = async() => {
   try {
     const parsed = await getData();
@@ -61,10 +58,11 @@ const getTopThreeElves = async() => {
       .slice(0, 3)
       .sum();
 
-    console.log(`the top 3 summed: ${top3}`);
+    return top3;
   } catch (err) {
     console.log(`OOPS! ${err}`)
   }
 }
 
-getTopThreeElves();
+getHungriestElf().then(res => console.log(`Result 1: ${res}`));
+getTopThreeElves().then(res => console.log(`Result 2: ${res}`));

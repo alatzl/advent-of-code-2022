@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import utils from '../utils.js';
+import utils from './utils.js';
 
 const testInput = `2-4,6-8
 2-3,4-5
@@ -10,7 +10,7 @@ const testInput = `2-4,6-8
 
 const method1 = async () => {
   // const input = testInput.split('\n');
-  const input = await utils.loadInput('./input.txt');
+  const input = await utils.loadInput('./inputs/day4.txt');
   let dupedPairs = 0;
   for(let i = 0; i < input.length; i++) {
     const [elfA, elfB] = input[i].split(',');
@@ -30,7 +30,7 @@ const range = (start, stop) => {
 };
 
 const method2 = async () => {
-  const input = await utils.loadInput('./input.txt');
+  const input = await utils.loadInput('./inputs/day4.txt');
   let dupedPairs = 0;
   for(let i = 0; i < input.length; i++) {
     const [elfA, elfB] = input[i].split(',');

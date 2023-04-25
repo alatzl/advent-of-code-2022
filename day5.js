@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import utils from '../utils.js';
+import utils from './utils.js';
 
 const testInput = `    [D]
 [N] [C]
@@ -13,7 +13,7 @@ move 1 from 1 to 2`;
 
 const solve = async (part) => {
   // const input = testInput.split('\n');
-  const input = await utils.loadInput('./input.txt');
+  const input = await utils.loadInput('./inputs/day5.txt');
   const breakPoint = input.findIndex(str => str.indexOf('move') > -1);
   const rows = input.slice(0, breakPoint);
   const steps = input.slice(breakPoint, input.length);
@@ -55,7 +55,6 @@ const solve = async (part) => {
   stepsArr.forEach(step => {
     const toMove = [];
     for (let i = 1; i <= step.num; i++) {
-      // console.log(`to: ${step.to}, from: ${step.from}`)
       toMove.push(transposed[step.from - 1].pop());
     }
 

@@ -1,4 +1,4 @@
-const fs = require('fs/promises');
+import fs from 'fs/promises';
 /*
   A > C
   B > A
@@ -10,7 +10,7 @@ C Z`;
 
 const calculateScores = async () => {
   // let input = testInput.split('\n');
-  let input = await fs.readFile('./input.txt');
+  let input = await fs.readFile('./inputs/day2.txt');
   input = input.toString().split('\n');
 
   return method2(input);
@@ -123,8 +123,8 @@ const method2 = (input) => {
 
   }
 
-      console.log(`Total points: ${totalPoints}`);
-    return totalPoints;
+  console.log(`Total points: ${totalPoints}`);
+  return totalPoints;
 }
 
 calculateScores();
