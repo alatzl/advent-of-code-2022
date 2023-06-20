@@ -13,19 +13,21 @@ R 2`;
 const solve = async () => {
   // const input = testInput.split("\n");
   const input = await utils.loadInput("./inputs/day9.txt");
-  let tailPositions = [];
-  tailPositions.push("0,0"); // to account for starting position
 
-  const h = {
-    x: 0,
-    y: 0,
+  return {
+    result1: trackKnotPositions(2, input),
+    result2: trackKnotPositions(10, input),
   };
+};
 
-  const t = {
-    x: 0,
-    y: 0,
-  };
-
+const trackKnotPositions = (numKnots, input) => {
+  const tailPositions = [];
+  const knots = [];
+  for (let i = 0; i < numKnots; i++) {
+    knots.push({ x: 0, y: 0 });
+    tailPositions.push(["0,0"]);
+  }
+  // console.log("knots", knots, "\n tailPositions", tailPositions);
   input.forEach((str) => {
     const [direction, steps] = str.split(" ");
     let axis = "";
@@ -52,20 +54,28 @@ const solve = async () => {
     }
 
     for (let i = 1; i <= steps; i++) {
-      h[axis] += stepValue;
-      const [x, y] = determineTailNextMove(h, t);
-      t.x += x;
-      t.y += y;
+      for (let j = 0; j < knots.length; j++) {
+        if (j === 0) {
+          // this is the head
+          knots[j][axis] += stepValue;
+        } else {
+          const [x, y] = determineTailNextMove(knots[j - 1], knots[j]);
+          knots[j].x += x;
+          knots[j].y += y;
+        }
 
-      tailPositions.push(`${t.x},${t.y}`);
-      // printPositions(h, t);
+        tailPositions[j].push(`${knots[j].x},${knots[j].y}`);
+      }
+
+      printPositions(knots[0], knots[1]);
     }
   });
+  // count up all visited tail positions for the LAST TAIL
+  const uniqueTailPositions = Array.from(
+    new Set(tailPositions[tailPositions.length - 1])
+  );
 
-  // count up all visited tail positions
-  const uniqueTailPositions = Array.from(new Set(tailPositions));
-
-  return { result1: uniqueTailPositions.length, result2: null };
+  return uniqueTailPositions.length;
 };
 
 const printPositions = (h, t) =>
