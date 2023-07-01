@@ -153,17 +153,13 @@ const solve = async () => {
   // const input = testInput.split('\n');
 
   const cycles = getCycles(input);
-  // cycles.forEach((val, idx) => {
-  //   console.log(`cycle ${idx}, register = ${val}`);
-  // });
   const keyCycles = [20, 60, 100, 140, 180, 220];
   const result1 = keyCycles.reduce((acc, current) => {
     return acc + current * cycles[current-1]; // -1 to account for array indexing
   }, 0);
+  const result2 = drawPixels(cycles);
 
-
-
-  return { result1, result2: {} };
+  return { result1, result2 };
 };
 
 const getCycles = (instructions) => {
@@ -195,10 +191,25 @@ const getCycles = (instructions) => {
 
 const drawPixels = (cycles) => {
   const width = 40;
-  const drawing = '';
-  for (let i = 0; i < 240; i++) {
-    // if ()
+  let drawing = '';
+
+  for (let i = 0; i < cycles.length; i++) {
+    const comparator = i > width - 1 ? i % width : i;
+    // console.log(`The cycle is ${i} and the register is ${register} and the comparator is ${comparator}.`)
+    if (cycles[i] - 1 === comparator || cycles[i] === comparator || cycles[i] + 1 === comparator) {
+      drawing += '#';
+    } else {
+      drawing += '.';
+    }
+
+    if ((i+1) % width === 0) {
+      // we are at the end of a row, add new line
+      drawing += '\n';
+    }
   }
+
+  console.log(drawing);
+  return drawing;
   
 }
 
